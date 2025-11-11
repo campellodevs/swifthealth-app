@@ -121,7 +121,6 @@
         .logo-icon {
             width: 44px;
             height: 44px;
-            background: var(--primary);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -131,24 +130,9 @@
             box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
         }
 
-        .logo-icon::before {
-            content: "";
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            border: 2px solid white;
-            border-radius: 50%;
-        }
-
-        .logo-icon::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 8px solid white;
-            bottom: 10px;
+        .logo-svg {
+            width: 100%;
+            height: 100%;
         }
 
         .logo-text {
@@ -610,7 +594,6 @@
         .mobile-logo-icon {
             width: 32px;
             height: 32px;
-            background: rgba(255, 255, 255, 0.2);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -618,24 +601,9 @@
             position: relative;
         }
 
-        .mobile-logo-icon::before {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border: 2px solid white;
-            border-radius: 50%;
-        }
-
-        .mobile-logo-icon::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-top: 6px solid white;
-            bottom: 6px;
+        .mobile-logo-svg {
+            width: 100%;
+            height: 100%;
         }
 
         .mobile-logo h1 {
@@ -870,7 +838,20 @@
         <header class="desktop-header">
             <div class="logo-section">
                 <div class="logo">
-                    <div class="logo-icon"></div>
+                    <div class="logo-icon">
+                        <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0066FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00D4AA;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="100" r="80" fill="url(#gradient)"/>
+                            <circle cx="100" cy="80" r="30" fill="none" stroke="white" stroke-width="8"/>
+                            <polygon points="100,120 85,150 115,150" fill="white"/>
+                            <circle cx="60" cy="60" r="20" fill="white" opacity="0.2"/>
+                        </svg>
+                    </div>
                     <div class="logo-text">
                         <h1>SwiftHealth</h1>
                         <span>Painel Hospitalar</span>
@@ -880,7 +861,7 @@
 
             <div class="header-info">
                 <div class="hospital-info">
-                    <div class="hospital-name">Hospital São Judas Tadeu</div>
+                    <div class="hospital-name">Hospital XYZ</div>
                     <div class="hospital-status">
                         <div class="status-dot"></div>
                         Sistema Online
@@ -1012,7 +993,7 @@
                     </div>
                     <div class="notification-content">
                         <div class="notification-item">
-                            <div class="notification-patient">Maria Silva</div>
+                            <div class="notification-patient">Jorge Antonio</div>
                             <div class="notification-details">Chegou para consulta - Sala 03</div>
                         </div>
                         <div class="notification-item">
@@ -1052,7 +1033,20 @@
         <div class="mobile-header">
             <div class="mobile-header-top">
                 <div class="mobile-logo">
-                    <div class="mobile-logo-icon"></div>
+                    <div class="mobile-logo-icon">
+                        <svg class="mobile-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="mobileGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0066FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00D4AA;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="100" r="80" fill="url(#mobileGradient)"/>
+                            <circle cx="100" cy="80" r="30" fill="none" stroke="white" stroke-width="8"/>
+                            <polygon points="100,120 85,150 115,150" fill="white"/>
+                            <circle cx="60" cy="60" r="20" fill="white" opacity="0.2"/>
+                        </svg>
+                    </div>
                     <h1>SwiftHealth</h1>
                 </div>
                 <div class="mobile-time" id="currentTime">10:30</div>
@@ -1087,7 +1081,7 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">Local:</span>
-                        <span class="info-value">Hospital São Judas Tadeu - Sala 03</span>
+                        <span class="info-value">Hospital XYZ - Sala 03</span>
                     </div>
                 </div>
             </div>
@@ -1204,6 +1198,141 @@
                 }, 10);
             }
         }, 10000);
+
+        // Efeito de interação nos botões
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Simular notificações em tempo real
+        setInterval(() => {
+            const notifications = document.querySelector('.notification-content');
+            if (notifications && Math.random() > 0.7) {
+                const patients = ['Carlos Santos', 'Mariana Lima', 'Roberto Alves', 'Fernanda Costa'];
+                const doctors = ['Dr. Matheus', 'Dra. Ana', 'Dra. Beatriz', 'Dr. Rodrigo'];
+                const statuses = ['Chegou para consulta', 'Em atendimento', 'Consulta concluída'];
+                
+                const randomPatient = patients[Math.floor(Math.random() * patients.length)];
+                const randomDoctor = doctors[Math.floor(Math.random() * doctors.length)];
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                
+                const newNotification = document.createElement('div');
+                newNotification.className = 'notification-item';
+                newNotification.innerHTML = `
+                    <div class="notification-patient">${randomPatient}</div>
+                    <div class="notification-details">${randomStatus} - ${randomDoctor}</div>
+                `;
+                
+                notifications.insertBefore(newNotification, notifications.firstChild);
+                
+                // Limitar para 5 notificações
+                if (notifications.children.length > 5) {
+                    notifications.removeChild(notifications.lastChild);
+                }
+                
+                // Efeito de highlight na nova notificação
+                newNotification.style.background = 'rgba(16, 185, 129, 0.2)';
+                setTimeout(() => {
+                    newNotification.style.background = '';
+                }, 2000);
+            }
+        }, 15000);
+
+        // Atualizar estatísticas dinamicamente
+        setInterval(() => {
+            const statValues = document.querySelectorAll('.stat-value');
+            if (statValues.length > 0 && Math.random() > 0.8) {
+                const currentValue = parseInt(statValues[0].textContent);
+                statValues[0].textContent = currentValue + 1;
+                
+                // Efeito de animação
+                statValues[0].style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    statValues[0].style.transform = 'scale(1)';
+                }, 300);
+            }
+        }, 20000);
+
+        // Detectar tipo de dispositivo e mostrar view apropriada
+        function detectDevice() {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const desktopView = document.querySelector('.desktop-view');
+            const mobileAppView = document.querySelector('.mobile-app-view');
+            const viewSwitcher = document.getElementById('viewSwitcher');
+            
+            if (isMobile && window.innerWidth <= 768) {
+                desktopView.style.display = 'none';
+                mobileAppView.style.display = 'flex';
+                if (viewSwitcher) {
+                    viewSwitcher.style.display = 'none';
+                }
+            } else {
+                desktopView.style.display = 'flex';
+                mobileAppView.style.display = 'none';
+                if (viewSwitcher) {
+                    viewSwitcher.style.display = 'flex';
+                }
+            }
+        }
+
+        // Executar detecção de dispositivo
+        detectDevice();
+        
+        // Re-detect device on resize
+        window.addEventListener('resize', detectDevice);
+
+        // Efeito de carregamento inicial
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Simular dados de pré-triagem em tempo real
+        setInterval(() => {
+            const triageValues = document.querySelectorAll('.triage-value');
+            if (triageValues.length > 0 && Math.random() > 0.9) {
+                // Pequenas variações nos valores vitais
+                const variations = {
+                    0: () => {
+                        const base = [115, 120, 125][Math.floor(Math.random() * 3)];
+                        const variation = [75, 80, 85][Math.floor(Math.random() * 3)];
+                        return `${base}/${variation} mmHg`;
+                    },
+                    1: () => {
+                        const base = [68, 72, 75][Math.floor(Math.random() * 3)];
+                        return `${base} bpm`;
+                    },
+                    2: () => {
+                        const base = [36.4, 36.5, 36.6][Math.floor(Math.random() * 3)];
+                        return `${base}°C`;
+                    },
+                    3: () => {
+                        const base = [97, 98, 99][Math.floor(Math.random() * 3)];
+                        return `${base}%`;
+                    }
+                };
+                
+                const randomIndex = Math.floor(Math.random() * 4);
+                if (variations[randomIndex] && triageValues[randomIndex]) {
+                    triageValues[randomIndex].textContent = variations[randomIndex]();
+                    
+                    // Efeito de atualização
+                    triageValues[randomIndex].style.color = '#0066FF';
+                    setTimeout(() => {
+                        triageValues[randomIndex].style.color = '';
+                    }, 1000);
+                }
+            }
+        }, 8000);
     </script>
 </body>
 </html>
